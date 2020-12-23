@@ -14,6 +14,10 @@ class Autostart(ABC):
     def disable(self, name: str):
         pass
 
+    @abstractmethod
+    def is_enabled(self, name):
+        pass
+
 
 class MacAutostart(Autostart):
 
@@ -38,5 +42,30 @@ class MacAutostart(Autostart):
         else:
             raise FileNotFoundError(f"Could not find file {path}")
 
+    def is_enabled(self, name):
+        return os.path.exists(self.get_path_for_name(name))
+
     def get_path_for_name(self, name):
         return f"{self.base_path}/{name}.plist"
+
+
+class WindowsAutostart(Autostart):
+
+    def enable(self, name: str, options: dict = None):
+        with open(self.get_path_for_name(name), "w") as file:
+            executable = options["executable"]
+            file.write(f'start "" {executable}')
+
+    def disable(self, name: str):
+        path = self.get_path_for_name(name)
+        if os.path.exists(path):
+            os.remove(path)
+        else:
+            raise FileNotFoundError(f"Could not find file {path}")
+
+    def is_enabled(self, name):
+        return os.path.exists(self.get_path_for_name(name))
+
+    @staticmethod
+    def get_path_for_name(name):
+        return f"C:\Users\{getpass.getuser()}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\{name}.bat"
