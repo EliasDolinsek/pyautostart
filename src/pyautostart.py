@@ -1,5 +1,6 @@
 import getpass
 import os
+import platform
 import plistlib
 from abc import ABC, abstractmethod
 
@@ -17,6 +18,38 @@ class Autostart(ABC):
     @abstractmethod
     def is_enabled(self, name):
         pass
+
+
+class SmartAutostart(Autostart):
+
+    def __init__(self):
+        if platform.system() == "Darwin":
+            self.autostart = MacAutostart()
+        elif platform.system() == "Windows":
+            self.autostart = WindowsAutostart()
+        else:
+            raise SystemError("Not supported system")
+
+    def enable(self, name: str, options: dict = None):
+        if self.autostart is MacAutostart:
+            parsed_options = {
+                "Label": name,
+                "ProgramArguments": options["args"]
+            }
+        elif self.autostart is WindowsAutostart:
+            parsed_options = {
+                "executable": "".join(options["args"])
+            }
+        else:
+            raise SystemError("Not supported system")
+
+        return self.enable(name, parsed_options)
+
+    def disable(self, name: str):
+        return self.autostart.disable(name)
+
+    def is_enabled(self, name):
+        return self.autostart.is_enabled(name)
 
 
 class MacAutostart(Autostart):
