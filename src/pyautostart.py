@@ -68,4 +68,4 @@ class WindowsAutostart(Autostart):
 
     @staticmethod
     def get_path_for_name(name):
-        return f"C:\Users\{getpass.getuser()}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\{name}.bat"
+        return f"C:\\Users\\{getpass.getuser()}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\{name}.bat"
