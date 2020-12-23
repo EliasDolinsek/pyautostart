@@ -110,7 +110,7 @@ class WindowsAutostart(Autostart):
     def enable(self, name: str, options: dict = None):
         """
         :param name: name of the executable file without file ending which is being stored in
-        C:\Users\<username>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+        C:\\Users\\<username>\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup
         :param options: requires "executable" (path to file which should be executed). "command" can be specified
         optionally to change the leading command (default='start ""')
         """
