@@ -52,9 +52,19 @@ class MacAutostart(Autostart):
 class WindowsAutostart(Autostart):
 
     def enable(self, name: str, options: dict = None):
+        if options is None:
+            raise ValueError("Options must not be None")
+        if "executable" not in options:
+            raise ValueError("'executable' must be specififed in options")
+
+        if "command" not in options:
+            command = 'start ""'
+        else:
+            command = options["command"]
+
         with open(self.get_path_for_name(name), "w") as file:
             executable = options["executable"]
-            file.write(f'start "" {executable}')
+            file.write(f'{command} {executable}')
 
     def disable(self, name: str):
         path = self.get_path_for_name(name)
@@ -68,4 +78,5 @@ class WindowsAutostart(Autostart):
 
     @staticmethod
     def get_path_for_name(name):
-        return f"C:\\Users\\{getpass.getuser()}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\{name}.bat"
+        return f"C:\\Users\\{getpass.getuser()}\\AppData\\Roaming\\Microsoft\\" \
+               f"Windows\\Start Menu\\Programs\\Startup\\{name}.bat"
