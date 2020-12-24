@@ -30,7 +30,8 @@ class TestMacAutostart(unittest.TestCase):
         autostart = MacAutostart()
         self.assertRaises(ValueError, autostart.enable, "name", {"Label": "label"})
 
-    def test_enable(self):
+    @staticmethod
+    def test_enable():
         autostart = MacAutostart()
         plistlib.dump = MagicMock()
         options = {"Label": "label", "ProgramArguments": "args"}
@@ -58,8 +59,8 @@ class TestWindowsAutostart(unittest.TestCase):
     def test_get_path_for_name(self):
         autostart = WindowsAutostart()
         result = autostart.get_path_for_name("name")
-        self.assertEquals(f"C:\\Users\\{getpass.getuser()}\\AppData\\Roaming\\Microsoft\\Windows\\Start "
-                          "Menu\\Programs\\Startup\\name.bat", result)
+        self.assertEqual(f"C:\\Users\\{getpass.getuser()}\\AppData\\Roaming\\Microsoft\\Windows\\Start "
+                         "Menu\\Programs\\Startup\\name.bat", result)
 
     def test_enable_missing_name(self):
         autostart = WindowsAutostart()
@@ -73,7 +74,8 @@ class TestWindowsAutostart(unittest.TestCase):
         autostart = WindowsAutostart()
         self.assertRaises(ValueError, autostart.enable, "name", {})
 
-    def test_enable_default_command(self):
+    @staticmethod
+    def test_enable_default_command():
         autostart = WindowsAutostart()
         options = {"executable": "path/to/executable.bat"}
 
@@ -82,7 +84,8 @@ class TestWindowsAutostart(unittest.TestCase):
 
         mock_open().write.assert_called_once_with('start "" path/to/executable.bat')
 
-    def test_enable_custom_command(self):
+    @staticmethod
+    def test_enable_custom_command():
         autostart = WindowsAutostart()
         options = {"executable": "path/to/executable.bat", "command": "test"}
 
