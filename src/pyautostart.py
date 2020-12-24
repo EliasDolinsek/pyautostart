@@ -6,7 +6,10 @@ from abc import ABC, abstractmethod
 
 
 class Autostart(ABC):
-    """Abstract autostart class"""
+
+    def __init__(self):
+        """Abstract autostart class."""
+        pass
 
     @abstractmethod
     def enable(self, name: str, options: dict = None):
@@ -69,9 +72,9 @@ class SmartAutostart(Autostart):
 
 
 class MacAutostart(Autostart):
-    """Implementation for macOS"""
 
     def __init__(self, base_path=f"/Users/{getpass.getuser()}/Library/LaunchAgents"):
+        """Implementation for macOS."""
         self.base_path = base_path
 
     def enable(self, name: str, options: dict = None):
@@ -105,7 +108,10 @@ class MacAutostart(Autostart):
 
 
 class WindowsAutostart(Autostart):
-    """Implementation for windows"""
+
+    def __init__(self):
+        """Implementation for windows."""
+        pass
 
     def enable(self, name: str, options: dict = None):
         """
