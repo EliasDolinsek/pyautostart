@@ -37,13 +37,47 @@ autostart.enable(name="com.example.myapplication", options=options)
 
 #### Disable automatic execution
 
-Calling `autostart.disable` will delete the file which is being created by `autostart.enable`. The `name` parameter has to
-be the one set during `autostart.enable`.
+Calling `autostart.disable` will delete the file which is being created by `autostart.enable`. The `name` parameter has
+to be the one set during `autostart.enable`.
 
 ````python
 from pyautostart import MacAutostart
 
 autostart = MacAutostart()
+autostart.disable(name="com.example.myapplication")
+````
+
+### Windows
+
+#### Make a python file be run after login
+
+The `options` dict must contain `executable`, which has to store to path to your executable file. `autostart.enable`
+will then create a `.bat` file which by default contains `start "" <executable>"`.
+
+This file will be stored
+inside `C:\\Users\\<username>\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup`.
+
+If you want to replace the `start ""` command. Add `command: "<command>"` to the options dict.
+
+```python
+from pyautostart import WindowsAutostart
+
+autostart = WindowsAutostart()
+options = {
+    "executable": "C:\\path\\to\\your\\executable",
+}
+autostart.enable(name="com.example.myapplication", options=options)
+```
+
+#### Disable automatic execution
+
+Calling `autostart.disable` will delete the file which is being created by `autostart.enable`. The `name` parameter has
+to be the one set during `autostart.enable`.
+
+````python
+from pyautostart import WindowsAutostart
+
+autostart = WindowsAutostart()
 autostart.disable(name="com.example.myapplication")
 ````
 
