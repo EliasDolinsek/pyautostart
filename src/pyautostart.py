@@ -14,26 +14,26 @@ class Autostart(ABC):
     @abstractmethod
     def enable(self, name: str, options: dict = None):
         """
-        Call this method if you want to add a file to the automatic boot
-        :param name: desired name for autostart file without file ending (e.g. com.example.myapplication)
-        :param options: contains platform dependent information like the path to the executable file
+        Call this method if you want to add a file to the automatic boot.
+        :param name: desired name for autostart file without file ending (e.g. com.example.myapplication).
+        :param options: contains platform dependent information like the path to the executable file.
         """
         pass
 
     @abstractmethod
     def disable(self, name: str):
         """
-        Call this method if you want to remove a file from automatic boot
-        :param name: name of autostart file without file ending
+        Call this method if you want to remove a file from automatic boot.
+        :param name: name of autostart file without file ending.
         """
         pass
 
     @abstractmethod
     def is_enabled(self, name):
         """
-        Returns weather a autostart file with a specific name exists
-        :param name: name of autostart file without file ending
-        :return: True if autostart with file exists, False if not
+        Returns weather a autostart file with a specific name exists.
+        :param name: name of autostart file without file ending.
+        :return: True if autostart with file exists, False if not.
         """
         pass
 
@@ -79,9 +79,10 @@ class MacAutostart(Autostart):
 
     def enable(self, name: str, options: dict = None):
         """
-        :param name: name of plist file which is being stored in base_path
+        Enables autostart for a file on macOS.
+        :param name: name of plist file which is being stored in base_path.
         :param options: requires "Label" (name of the job) and "ProgramArguments" (array of strings representing a
-        UNIX command). For more options and information go to https://en.wikipedia.org/wiki/Launchd
+        UNIX command). For more options and information go to https://en.wikipedia.org/wiki/Launchd.
         """
         if options is None:
             raise ValueError("options must not be None")
@@ -115,10 +116,11 @@ class WindowsAutostart(Autostart):
 
     def enable(self, name: str, options: dict = None):
         """
+        Enables autostart for a file on windows.
         :param name: name of the executable file without file ending which is being stored in
-        C:\\Users\\<username>\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup
+        C:\\Users\\<username>\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup.
         :param options: requires "executable" (path to file which should be executed). "command" can be specified
-        optionally to change the leading command (default='start ""')
+        optionally to change the leading command (default='start ""').
         """
         if options is None:
             raise ValueError("Options must not be None")
