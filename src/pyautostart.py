@@ -39,7 +39,7 @@ class Autostart(ABC):
 
 
 class SmartAutostart(Autostart):
-    """Platform independent implementation"""
+    """Platform independent implementation."""
 
     def __init__(self):
         if platform.system() == "Darwin":
