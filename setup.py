@@ -5,7 +5,7 @@ with open("README.md", "r") as file:
 
 setup(
     name="pyautostart",
-    version="0.1.0",
+    version="0.1.1",
     description="Make executable files run after user login",
     py_modules=["pyautostart"],
     package_dir={"": "src"},
