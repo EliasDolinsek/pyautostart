@@ -50,19 +50,19 @@ class SmartAutostart(Autostart):
             raise SystemError("Not supported system")
 
     def enable(self, name: str, options: dict = None):
-        if self.autostart is MacAutostart:
+        if isinstance(self.autostart, MacAutostart):
             parsed_options = {
                 "Label": name,
-                "ProgramArguments": options["args"]
+                "ProgramArguments": "".join(options["args"])
             }
-        elif self.autostart is WindowsAutostart:
+        elif isinstance(self.autostart, WindowsAutostart):
             parsed_options = {
                 "executable": "".join(options["args"])
             }
         else:
             raise SystemError("Not supported system")
 
-        return self.enable(name, parsed_options)
+        return self.autostart.enable(name, parsed_options)
 
     def disable(self, name: str):
         return self.autostart.disable(name)
