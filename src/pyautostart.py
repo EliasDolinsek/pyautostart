@@ -53,7 +53,7 @@ class SmartAutostart(Autostart):
         if isinstance(self.autostart, MacAutostart):
             parsed_options = {
                 "Label": name,
-                "ProgramArguments": "".join(options["args"])
+                "ProgramArguments": options["args"]
             }
         elif isinstance(self.autostart, WindowsAutostart):
             parsed_options = {
