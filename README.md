@@ -19,7 +19,7 @@ pip install pyautostart
 
 #### Make a file be run after login
 
-The `options` dict must contain `args` which has to be a list that usually contain the path to the executable file.
+The `options` dict must contain `args` which has to be a list that usually contains the path to the executable file.
 The `name` parameter of `autostart.enable` sets the name of the file which will then be created by the platform
 dependent implementation.
 
