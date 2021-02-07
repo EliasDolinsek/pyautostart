@@ -61,6 +61,7 @@ from pyautostart import MacAutostart
 autostart = MacAutostart()
 options = {
     "Label": "Name of the job",
+    "RunAtLoad": True,
     "ProgramArguments": [
         "/Library/Frameworks/Python.framework/Versions/3.8/bin/python3",
         "/path/to/your/file.py"
