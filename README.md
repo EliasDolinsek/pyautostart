@@ -52,7 +52,7 @@ autostart.disable(name="com.example.myapplication")
 #### Make a file be run after login
 
 The `options` dict contains the configuration for launchd. For a list of all valid options and their meanings, go to
-the [Wikipedia article of launchd](en.wikipedia.org/wiki/Launchd/). The `name` parameter of `autostart.enable` sets the
+the [Wikipedia article of launchd](https://en.wikipedia.org/wiki/Launchd). The `name` parameter of `autostart.enable` sets the
 name of the file which will be stored in `/Users/<username>/Library/LaunchAgents` if not changed.
 
 ```python
@@ -60,7 +60,7 @@ from pyautostart import MacAutostart
 
 autostart = MacAutostart()
 options = {
-    "Label": "Name of",
+    "Label": "Name of the job",
     "ProgramArguments": [
         "python3",
         "/path/to/your/file.py"
