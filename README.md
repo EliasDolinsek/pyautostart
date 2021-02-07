@@ -62,7 +62,7 @@ autostart = MacAutostart()
 options = {
     "Label": "Name of the job",
     "ProgramArguments": [
-        "python3",
+        "/Library/Frameworks/Python.framework/Versions/3.8/bin/python3",
         "/path/to/your/file.py"
     ]
 }
